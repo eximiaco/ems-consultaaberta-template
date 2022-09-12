@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{BDA2BF8D-E95D-4A0C-A7C5-6C6064CC4E47}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMS.ConsultaAberta", "src\EMS.ConsultaAberta\EMS.ConsultaAberta.csproj", "{7F231943-BF92-4FEA-B1F7-78AD7FE2B735}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMS.ConsultaAberta.HttpServelessApi", "src\EMS.ConsultaAberta.HttpServelessApi\EMS.ConsultaAberta.HttpServelessApi.csproj", "{7729DE00-3C48-467B-99A1-47154BCA1B55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B0C25380-2205-43A0-A9FB-63651CF48479}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{52F5157D-9666-439F-87A2-2AD3BF7F64AC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F231943-BF92-4FEA-B1F7-78AD7FE2B735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F231943-BF92-4FEA-B1F7-78AD7FE2B735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F231943-BF92-4FEA-B1F7-78AD7FE2B735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F231943-BF92-4FEA-B1F7-78AD7FE2B735}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7729DE00-3C48-467B-99A1-47154BCA1B55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7729DE00-3C48-467B-99A1-47154BCA1B55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7729DE00-3C48-467B-99A1-47154BCA1B55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7729DE00-3C48-467B-99A1-47154BCA1B55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7729DE00-3C48-467B-99A1-47154BCA1B55} = {B0C25380-2205-43A0-A9FB-63651CF48479}
+		{7F231943-BF92-4FEA-B1F7-78AD7FE2B735} = {B0C25380-2205-43A0-A9FB-63651CF48479}
+	EndGlobalSection
+EndGlobal

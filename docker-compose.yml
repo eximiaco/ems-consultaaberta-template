@@ -1,0 +1,43 @@
+version: '3.7'
+services:
+  mongo_db:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootPassword
+    ports:
+      - 27017:27017
+    volumes:
+      - ~/app/mongoData:/data/db
+    networks:
+      - mongo-compose-network
+
+  mongo_express:
+    image: mongo-express
+    environment:
+      - ME_CONFIG_OPTIONS_EDITORTHEME=default
+      - ME_CONFIG_MONGODB_SERVER=mongo_db
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=rootPassword
+    ports:
+      - "8081:8081"
+    restart: always
+    depends_on:
+      - mongo_db
+    networks:
+      - mongo-compose-network
+  seq:
+    image: datalust/seq
+    ports:
+      - 8003:80
+      - 5341:5341
+    volumes:
+      - ~/app/seqData:/data
+    environment:
+      ACCEPT_EULA: "Y"
+
+networks:
+  mongo-compose-network:
+    driver: bridge
