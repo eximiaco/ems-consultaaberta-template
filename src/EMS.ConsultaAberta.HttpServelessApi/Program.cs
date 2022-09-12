@@ -8,26 +8,25 @@ using Serilog.Exceptions;
 var Namespace = typeof(Program).Namespace;
 var AppName = Namespace?[(Namespace.LastIndexOf('.', Namespace.LastIndexOf('.') - 1) + 1)..];
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Configuration
+var configBuilder = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddUserSecrets<Program>()
     .AddEnvironmentVariables();
-
+var configuration = configBuilder.Build();
 var loggerSwitch = new LoggingLevelSwitch
 {
-    MinimumLevel = Enum.TryParse(builder.Configuration["LogSwitch"], true, out LogEventLevel level) 
+    MinimumLevel = Enum.TryParse(configuration["LogSwitch"], true, out LogEventLevel level) 
         ? level 
         : LogEventLevel.Warning
 };
 
-//var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")??"Development";
 
 var loggerBuilder = new LoggerConfiguration()
-    .ReadFrom.Configuration(builder.Configuration)
+    .ReadFrom.Configuration(configuration)
     .MinimumLevel.ControlledBy(loggerSwitch)
-    //.Enrich.WithProperty("Environment", environmentName)
+    .Enrich.WithProperty("Environment", environmentName)
     .Enrich.FromLogContext()
     .Enrich.WithExceptionDetails()
     .Enrich.WithMachineName();
@@ -41,16 +40,21 @@ try
     
     builder.Services.AddControllers();
     builder.Services.AddAWSLambdaHosting(LambdaEventSource.RestApi);
-    builder.Services.Configure<MongoOptions>(builder.Configuration.GetSection(MongoOptions.Name));
-
+    builder.Services.Configure<MongoOptions>(configuration.GetSection(MongoOptions.Name));
+    builder.Services.AddScoped<MateriaisRepository>();
+    EntitiesConfiguration.ApplyMongoEntitiesConfiguration();
+    
     var app = builder.Build();
-
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSerilogRequestLogging();
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
     app.UseHttpsRedirection();
     app.UseAuthorization();
     app.MapControllers();
-
-    EntitiesConfiguration.ApplyMongoEntitiesConfiguration();
-
     app.Run();
     return 0;
 }

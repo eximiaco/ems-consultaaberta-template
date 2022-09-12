@@ -34,6 +34,6 @@ public class MateriaisController : ControllerBase
     {
         var material = new Material(Guid.NewGuid(), "33333", "TESTE");
         await _materiaisRepository.Insert(material, cancellationToken);
-        return CreatedAtAction(nameof(GetById), material.Id); 
+        return Ok(material.Id); 
     }
 }

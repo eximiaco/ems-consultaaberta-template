@@ -1,5 +1,6 @@
 ﻿using EMS.ConsultaAberta.Crosscutting;
 using EMS.ConsultaAberta.QueryModel;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace EMS.ConsultaAberta.Infra;
@@ -8,10 +9,10 @@ public sealed class MateriaisRepository
 {
     private readonly IMongoCollection<Material> _collection;
     
-    public MateriaisRepository(MongoOptions mongoOptions)
+    public MateriaisRepository(IOptions<MongoOptions> mongoOptions)
     {
-        var client = new MongoClient(mongoOptions.Connection);
-        var database = client.GetDatabase(mongoOptions.Database);
+        var client = new MongoClient(mongoOptions.Value.Connection);
+        var database = client.GetDatabase(mongoOptions.Value.Database);
         _collection = database.GetCollection<Material>("materiais");
     }
 
