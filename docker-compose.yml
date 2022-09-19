@@ -31,8 +31,8 @@ services:
   seq:
     image: datalust/seq
     ports:
-      - 8003:80
-      - 5341:5341
+      - "80:80"
+      - "5341:5341"
     volumes:
       - ~/app/seqData:/data
     environment:

@@ -19,8 +19,11 @@
         <PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
         <PackageReference Include="Serilog.Sinks.Seq" Version="5.1.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="Autofac" Version="6.4.0" />
+        <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\EMS.ConsultaAberta\EMS.ConsultaAberta.csproj" />
+      <ProjectReference Include="..\EMS.Infrastructure.Web\EMS.Infrastructure.Web.csproj" />
     </ItemGroup>
 </Project>

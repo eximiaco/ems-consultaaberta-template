@@ -14,7 +14,7 @@ public class EntitiesConfiguration
 
         BsonClassMap.RegisterClassMap<Entity<Guid>>(x =>
         {
-            x.MapIdProperty(x => x.Id).SetSerializer(new GuidSerializer(GuidRepresentation.Standard));
+            x.MapIdProperty(c => c.Id).SetSerializer(new GuidSerializer(GuidRepresentation.Standard));
         });
 
         BsonClassMap.RegisterClassMap<Material>(x =>
