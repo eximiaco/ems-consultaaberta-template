@@ -19,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 var configBuilder = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddUserSecrets<Program>()
+    // .AddUserSecrets<Program>()
     .AddEnvironmentVariables();
 var configuration = configBuilder.Build();
 
@@ -52,7 +52,7 @@ try
         });
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
-    builder.Services.AddAWSLambdaHosting(LambdaEventSource.RestApi);
+    builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
     builder.Services.AddOptions();
     builder.Services.AddSingleton(Log.Logger);
     EntitiesConfiguration.ApplyMongoEntitiesConfiguration();
