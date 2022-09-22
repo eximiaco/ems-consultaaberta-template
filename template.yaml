@@ -16,7 +16,10 @@ Resources:
       CodeUri: ./src/EMS.ConsultaAberta.HttpServelessApi/
       Handler: EMS.ConsultaAberta.HttpServelessApi
       Runtime: dotnet6
-      MemorySize: 1024
+      MemorySize: 128
+      Environment:
+        Variables:
+          ASPNETCORE_ENVIRONMENT: Production
       Events:
         ProxyResource:
           Type: HttpApi
