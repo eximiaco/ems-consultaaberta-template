@@ -8,7 +8,4 @@ public class ListagemMateriaisModel
     public string Descricao { get; init; }
 }
 
-public class RecuperarMateriaisPaginadosModel : PaginationModel<ListagemMateriaisModel>
-{
-    
-}
+public class RecuperarMateriaisPaginadosModel : PaginationModel<ListagemMateriaisModel> { }
