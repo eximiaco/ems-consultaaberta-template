@@ -19,8 +19,10 @@ var builder = WebApplication.CreateBuilder(args);
 var configBuilder = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    // .AddUserSecrets<Program>()
     .AddEnvironmentVariables();
+if (environmentName == "Development")
+    configBuilder.AddUserSecrets<Program>();
+
 var configuration = configBuilder.Build();
 
 var loggerSwitch = new LoggingLevelSwitch
